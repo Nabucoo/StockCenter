@@ -14,3 +14,4 @@ def seletor_interativo():
     print(f"Você escolheu: {resposta['opcao']}")
 
 seletor_interativo()
+
