@@ -1,4 +1,6 @@
 import visualizar, adicionar, remover, buscar, os, questionary
+estoque = []
+
 while True:
     print("--------------------------------")
     print("|{:^30}|".format("STOCK CENTER"))
@@ -23,9 +25,9 @@ while True:
     ]).ask()
 
     if resposta == "1":
-        pass
-    elif resposta == "2":
-        pass
+        visualizar.visualizar_estoque(estoque)
+    elif resposta == "2": 
+        adicionar.adicionar_item(estoque)
     elif resposta == "3":
         pass
     elif resposta == "4":
