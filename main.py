@@ -1,5 +1,5 @@
 import visualizar, adicionar, remover, buscar, os, questionary
-estoque = []
+estoque = {}
 
 while True:
     print("--------------------------------")
@@ -11,7 +11,7 @@ while True:
     print("|{:^30}|".format("2 - Adicionar item"))
     print("|{:^30}|".format("3 - Remover item"))
     print("|{:^30}|".format("4 - Buscar item"))
-    print("|{:^30}|".format("5 - Adicionar local"))
+    print("|{:^30}|".format("5 - Adicionar espaco"))
     print("|{:^30}|".format("6 - Sair"))
     print("--------------------------------")
 
@@ -33,7 +33,7 @@ while True:
     elif resposta == "4":
         pass
     elif resposta == "5":
-        pass
+        adicionar.criar_local(estoque)
     elif resposta == "6":
         print("Sessão encerrada!")
         exit()

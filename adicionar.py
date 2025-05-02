@@ -1,15 +1,27 @@
 import questionary
 
 #criar local pra armazenar items 
-def criar_local(estoque):
+def criar_local(estoque):             
     nome_do_espaco = str(input("Digite o nome do novo espaço abaixo:\n"))
     while not nome_do_espaco.strip():
         nome_do_espaco = str(input("Nome inválido, digite um nome válido(para cancelar digite 'c'):\n"))
         if nome_do_espaco == 'c': 
             print("Operação cancelada!")
             return
-    
-    estoque.append({"nome": nome_do_espaco, "itens": []})
+        
+    while estoque:
+        nome_lugar = questionary.select("", choices=["aqui mesmo"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
+        if nome_lugar == "aqui mesmo":
+            estoque["espacos"].append({"nome": nome_do_espaco, "itens": [], "espacos": []})
+            return
+        else:
+            for espaco in estoque["espacos"]:
+                if nome_lugar == espaco["nome"]:
+                    estoque = espaco
+    else:
+        estoque["nome"] = nome_do_espaco
+        estoque["itens"] = []
+        estoque["espacos"] = []
 
 #criar item
 def criar_item(estoque):
@@ -23,23 +35,26 @@ def criar_item(estoque):
     descricao_item = str(input("Digite a descrição, se necessário: "))
 
     #aonde quer colocar o item
-    lugar_do_item = questionary.select("Aonde deseja manejar o novo item?", choices=[espaco["nome"] for espaco in estoque
-    ]).ask()
-    novo_item = {
-        "nome": nome_item,
-        "descrição": descricao_item,
-    }
-    #percorre o estoque e adiciona onde o usuario decidiu
-    for espaco in estoque:
-        if espaco["nome"] == lugar_do_item:
-            espaco["itens"].append(novo_item)
-    print("Item manejado com sucesso!")
-    return
+    while estoque:
+        lugar_do_item = questionary.select("Aonde deseja manejar o novo item?", choices=["aqui mesmo"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
+        novo_item = {
+            "nome": nome_item,
+            "descrição": descricao_item,
+        }
+        if lugar_do_item == "aqui mesmo":
+            estoque["itens"].append(novo_item)
+            print("Item manejado com sucesso!")
+            return
+        else:
+            #percorre o estoque e adiciona onde o usuario decidiu
+            for espaco in estoque["espacos"]:
+                if espaco["nome"] == lugar_do_item:
+                    estoque = espaco
 
 
 def adicionar_item(estoque): 
     #nao da pra adicionar item sem espaco
-    if estoque == []:
+    if estoque == {}:
         print("Não há locais disponíveis para armazenar produtos!")
         resposta = questionary.select('Deseja criar um novo espaço de armazenamento?', choices=[
             'sim',
@@ -51,17 +66,20 @@ def adicionar_item(estoque):
             return
     else:
         print("|{:^30}|".format("AÇÕES DISPONÍVEIS"))
-        print("|{:^30}|".format("1 - Adicionar espaço"))
-        print("|{:^30}|".format("2 - Adicionar item"))
+        print("|{:^30}|".format("1 - Adicionar item"))
         print("|{:^30}|".format("2 - Editar item"))
+        print("|{:^30}|".format("3 - Voltar"))
+
         resposta = questionary.select('Escolha uma opção:', choices=[
         '1',
         '2',
         '3',
     ]).ask()
         if resposta == "1":
-            criar_local(estoque)
-        elif resposta == "2":
             criar_item(estoque)
+        elif resposta == "2":
+            pass
+        elif resposta == "3":
+            return
 
         
