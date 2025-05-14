@@ -29,7 +29,7 @@ while True:
     elif resposta == "2": 
         adicionar.adicionar_item(estoque)
     elif resposta == "3":
-        pass
+        remover.remover(estoque)
     elif resposta == "4":
         pass
     elif resposta == "5":

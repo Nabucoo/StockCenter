@@ -40,11 +40,18 @@ def criar_item(estoque):
         novo_item = {
             "nome": nome_item,
             "descrição": descricao_item,
+            "quantidade": 1
         }
         if lugar_do_item == "aqui mesmo":
-            estoque["itens"].append(novo_item)
-            print("Item manejado com sucesso!")
-            return
+            for item in estoque["itens"]:
+                if novo_item["nome"] == item["nome"]:
+                    item["quantidade"] += 1
+                    print("item manejado com sucesso!")
+                    return
+            else:
+                estoque["itens"].append(novo_item)
+                print("Item manejado com sucesso!")
+                return
         else:
             #percorre o estoque e adiciona onde o usuario decidiu
             for espaco in estoque["espacos"]:
