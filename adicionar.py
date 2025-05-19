@@ -33,19 +33,21 @@ def criar_item(estoque):
             print("Operação cancelada!")
             return
     descricao_item = str(input("Digite a descrição, se necessário: "))
-
+    quantidade = int(input("Quantidade: ") or 1)
+    while quantidade < 1:
+        quantidade = int(input("Quantidade inválida: ") or 1)
     #aonde quer colocar o item
     while estoque:
         lugar_do_item = questionary.select("Aonde deseja manejar o novo item?", choices=["aqui mesmo"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
         novo_item = {
             "nome": nome_item,
             "descrição": descricao_item,
-            "quantidade": 1
+            "quantidade": quantidade
         }
         if lugar_do_item == "aqui mesmo":
             for item in estoque["itens"]:
                 if novo_item["nome"] == item["nome"]:
-                    item["quantidade"] += 1
+                    item["quantidade"] += quantidade
                     print("item manejado com sucesso!")
                     return
             else:
