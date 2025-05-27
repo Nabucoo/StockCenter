@@ -1,6 +1,6 @@
 import visualizar, adicionar, remover, buscar, os, questionary
 estoque = {}
-
+print(",")
 while True:
     print("--------------------------------")
     print("|{:^30}|".format("STOCK CENTER"))
