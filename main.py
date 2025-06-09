@@ -27,7 +27,9 @@ def gerenciar(estoque):
         elif resposta == "2": 
             remover_item.remover_item(estoque)
         elif resposta == "3":
-            buscar_item.buscar_item(estoque)
+            nome_item = str(input("Digite o nome do item abaixo:\n")).lower()
+            buscar_item.buscar_item(estoque, nome_item)
+
         elif resposta == "4":
             editar_item.editar_item(estoque)
         elif resposta == "5":
@@ -43,7 +45,7 @@ def configurar(estoque):
         print("|{:^30}|".format("1 - Adicionar espaço"))
         print("|{:^30}|".format("2 - Editar espaço"))
         print("|{:^30}|".format("3 - Remover espaço"))
-        print("|{:^30}|".format("4 - Sair"))
+        print("|{:^30}|".format("4 - Voltar"))
         print("--------------------------------")
         
         resposta = questionary.select('Escolha uma opção:', choices=[

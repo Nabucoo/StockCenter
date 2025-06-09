@@ -13,7 +13,7 @@ def criar_item(estoque):
         else: 
             return
     #pergunta caracteristicas do item
-    nome_item = str(input("Digite o nome do item abaixo:\n"))
+    nome_item = str(input("Digite o nome do item abaixo:\n")).lower()
     while not nome_item.strip():
         nome_item = str(input("Nome inválido, digite um nome válido(para cancelar digite 'c'):\n"))
         if nome_item == 'c': 
@@ -28,7 +28,7 @@ def criar_item(estoque):
         lugar_do_item = questionary.select("Aonde deseja manejar o novo item?", choices=["aqui mesmo"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
         novo_item = {
             "nome": nome_item,
-            "descrição": descricao_item,
+            "descricao": descricao_item,
             "quantidade": quantidade
         }
         if lugar_do_item == "aqui mesmo":
