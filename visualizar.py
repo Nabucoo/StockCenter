@@ -5,6 +5,8 @@ def visualizar_estoque(estoque, caminho=""):
         print(f"Local: {caminho_atual}")
         for item in estoque["itens"]:
             print(f"\tNome: {item["nome"]}")
+            if item["descricao"]:
+                print(f"\t\tDescrição: {item["descricao"]}")
             print(f"\t\tQuantidade: {item["quantidade"]}")
 
         if estoque["espacos"]:

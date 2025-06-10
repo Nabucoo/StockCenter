@@ -25,10 +25,14 @@ def gerenciar(estoque):
         if resposta == "1":
             criar_item.criar_item(estoque)
         elif resposta == "2": 
-            remover_item.remover_item(estoque)
+            nome_item = str(input("Digite o nome do item abaixo:\n")).lower()
+            remover_item.remover_item(estoque, nome_item)
+            print("item removido!")
         elif resposta == "3":
             nome_item = str(input("Digite o nome do item abaixo:\n")).lower()
-            buscar_item.buscar_item(estoque, nome_item)
+            resultado = ""
+            resultado = buscar_item.buscar_item(estoque, nome_item)
+            buscar_item.printar_item(resultado)
 
         elif resposta == "4":
             editar_item.editar_item(estoque)
@@ -57,7 +61,9 @@ def configurar(estoque):
         if resposta == "1":
             adicionar_espaco.criar_espaco(estoque)
         elif resposta == "2": 
+            nome_espaco = input("Digite o nome do espaço: ")
             remover_espaco.remover_espaco(estoque)
+
         elif resposta == "3":
             editar_espaco.editar_espaco(estoque)
         elif resposta == "4":
