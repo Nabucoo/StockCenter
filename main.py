@@ -1,5 +1,5 @@
 import visualizar, os, questionary
-from configurar import adicionar_espaco, editar_espaco, remover_espaco
+from configurar import adicionar_espaco, editar_espaco, remover_espaco, buscar_espaco
 from gerenciar import criar_item, remover_item, buscar_item, editar_item
 estoque = {}
 
@@ -49,7 +49,8 @@ def configurar(estoque):
         print("|{:^30}|".format("1 - Adicionar espaço"))
         print("|{:^30}|".format("2 - Editar espaço"))
         print("|{:^30}|".format("3 - Remover espaço"))
-        print("|{:^30}|".format("4 - Voltar"))
+        print("|{:^30}|".format("4 - Buscar espaco"))
+        print("|{:^30}|".format("5 - Voltar"))
         print("--------------------------------")
         
         resposta = questionary.select('Escolha uma opção:', choices=[
@@ -57,6 +58,7 @@ def configurar(estoque):
             '2',
             '3',
             '4',
+            '5',
         ]).ask()
         if resposta == "1":
             adicionar_espaco.criar_espaco(estoque)
@@ -67,6 +69,11 @@ def configurar(estoque):
         elif resposta == "3":
             editar_espaco.editar_espaco(estoque)
         elif resposta == "4":
+            nome_espaco = str(input("Digite o nome do espaco abaixo:\n")).lower()
+            resultado = ""
+            resultado = buscar_espaco.buscar_espaco(estoque, nome_espaco)
+            buscar_espaco.printar_espaco(resultado)
+        elif resposta == "5":
             return
         else:
             print("Valor inválido")
