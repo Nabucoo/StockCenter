@@ -3,6 +3,7 @@ from configurar import adicionar_espaco, editar_espaco, remover_espaco, buscar_e
 from gerenciar import criar_item, remover_item, buscar_item, editar_item
 estoque = {}
 
+
 def gerenciar(estoque):
     while True:
         print("--------------------------------")
@@ -63,11 +64,11 @@ def configurar(estoque):
         if resposta == "1":
             adicionar_espaco.criar_espaco(estoque)
         elif resposta == "2": 
-            nome_espaco = input("Digite o nome do espaço: ")
-            remover_espaco.remover_espaco(estoque)
-
-        elif resposta == "3":
             editar_espaco.editar_espaco(estoque)
+        elif resposta == "3":
+            nome_espaco = input("Digite o nome do espaço: ")
+            remover_espaco.remover_espaco(estoque, nome_espaco)
+
         elif resposta == "4":
             nome_espaco = str(input("Digite o nome do espaco abaixo:\n")).lower()
             resultado = ""

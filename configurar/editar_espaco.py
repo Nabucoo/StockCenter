@@ -9,7 +9,7 @@ def editar_espaco(estoque):
         print("Espaço não encontrado!")
         return
 
-    buscar_espaco.printar_espacos(resultado)
+    buscar_espaco.printar_espaco(resultado)
 
     escolha = questionary.select("Qual espaço deseja editar?", choices=[f"Caminho: {espaco[0]}" for espaco in resultado]).ask()
     caminho = escolha[8:]  # remove a palavra "Caminho: " exemplo "caminho:esquina" = esquina 
