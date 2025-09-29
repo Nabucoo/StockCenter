@@ -15,8 +15,8 @@ def criar_espaco(estoque):
             print("Espaço criado com sucesso!")
             return
         else:
-            nome_lugar = questionary.select("", choices=["aqui mesmo"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
-            if nome_lugar == "aqui mesmo":
+            nome_lugar = questionary.select("", choices=["Local Atual"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
+            if nome_lugar == "Local Atual":
                 estoque["espacos"].append({"nome": nome_do_espaco, "itens": [], "espacos": []})
                 print("Espaço criado com sucesso!")
                 return

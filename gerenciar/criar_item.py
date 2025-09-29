@@ -1,5 +1,6 @@
 import questionary
 from configurar import adicionar_espaco 
+from colorama import init, Style
 #criar item
 def criar_item(estoque):
     if estoque == {}:
@@ -25,13 +26,13 @@ def criar_item(estoque):
         quantidade = int(input("Quantidade inválida: ") or 1)
     #aonde quer colocar o item
     while estoque:
-        lugar_do_item = questionary.select("Aonde deseja manejar o novo item?", choices=["aqui mesmo"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
+        lugar_do_item = questionary.select("Aonde deseja manejar o novo item?", choices=["Local Atual"] + [espaco["nome"] for espaco in estoque["espacos"]]).ask()
         novo_item = {
             "nome": nome_item,
             "descricao": descricao_item,
             "quantidade": quantidade
         }
-        if lugar_do_item == "aqui mesmo":
+        if lugar_do_item == "Local Atual":
             for item in estoque["itens"]:
                 if novo_item["nome"] == item["nome"]:
                     item["quantidade"] += quantidade

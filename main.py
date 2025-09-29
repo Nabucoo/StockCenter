@@ -1,20 +1,28 @@
 import visualizar, os, questionary
+from colorama import init, Back, Fore, Style
 from configurar import adicionar_espaco, editar_espaco, remover_espaco, buscar_espaco
 from gerenciar import criar_item, remover_item, buscar_item, editar_item
+
+init(autoreset = True)#isso aqui é para inicializar o colorama
+
 estoque = {}
 
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def gerenciar(estoque):
+    limpar_tela()
     while True:
-        print("--------------------------------")
-        print("|{:^30}|".format("AÇÕES DISPONÍVEIS"))
-        print("--------------------------------")
-        print("|{:^30}|".format("1 - Adicionar item"))
-        print("|{:^30}|".format("2 - Remover item"))
-        print("|{:^30}|".format("3 - Buscar item"))
-        print("|{:^30}|".format("4 - Editar item"))
-        print("|{:^30}|".format("5 - Voltar"))
-        print("--------------------------------")
+        print("╔══════════════════════════════════════╗")
+        print(Style.BRIGHT + "║" + "OPERACOES DE ESTOQUE 🔧".center(37) + "║")
+        print("╚══════════════════════════════════════╝\n")
+        print("╔══════════════════════════════════════╗")
+        print("║" + "1 - Registrar produto ➕".center(37) + "║") #adicionar
+        print("║" + "2 - Baixa de produto ❌".center(37) + "║") #remover
+        print("║" + "3 - Consulta de item 🔍".center(37) + "║") #buscar
+        print("║" + "4 - Atualizar cadastro ✏️".center(39) + "║") #editar
+        print("║" + "5 - Voltar 🔙".center(37) + "║") #sair
+        print("╚══════════════════════════════════════╝\n")
 
         resposta = questionary.select('Escolha uma opção:', choices=[
             '1',
@@ -43,16 +51,18 @@ def gerenciar(estoque):
             print("Valor inválido")
     
 def configurar(estoque):
+    limpar_tela()
     while True:
-        print("--------------------------------")
-        print("|{:^30}|".format("AÇÕES DISPONÍVEIS"))
-        print("--------------------------------")
-        print("|{:^30}|".format("1 - Adicionar espaço"))
-        print("|{:^30}|".format("2 - Editar espaço"))
-        print("|{:^30}|".format("3 - Remover espaço"))
-        print("|{:^30}|".format("4 - Buscar espaco"))
-        print("|{:^30}|".format("5 - Voltar"))
-        print("--------------------------------")
+        print("╔══════════════════════════════════════╗")
+        print(Style.BRIGHT + "║" + "CONFIGURAR ESTOQUE ⚙️".center(38) + "║")
+        print("╚══════════════════════════════════════╝\n")
+        print("╔══════════════════════════════════════╗")
+        print("║" + "1 - Criar local de armazenagem 🏠".center(37) + "║") #adicionar
+        print("║" + "2 - Editar local de armazenagem 🛠".center(38) + "║") #editar
+        print("║" + "3 - Excluir local de armazenagem ❌".center(37) + "║") #excluir
+        print("║" + "4 - Buscar local de armazenagem 🔎".center(37) + "║") #buscar
+        print("║" + "5 - Voltar 🔙".center(37) + "║") #sair
+        print("╚══════════════════════════════════════╝\n")
         
         resposta = questionary.select('Escolha uma opção:', choices=[
             '1',
@@ -79,34 +89,38 @@ def configurar(estoque):
         else:
             print("Valor inválido")
 
-while True:
+def MenuPrincipal():
+    while True:
+        print("╔══════════════════════════════════════╗")
+        print(Style.BRIGHT + "║" + "STOCK CENTER SYSTEM".center(38) + "║")
+        print("╚══════════════════════════════════════╝\n")
+        print("╔══════════════════════════════════════╗")
+        print(Style.BRIGHT + "║" + "MENU PRINCIPAL".center(38) + "║") #o .center centralize a string com base na quantidade de casas colocada como argumento
+        print("║" + " ".center(38) + "║")
+        print(Style.BRIGHT + "║" + "1 - Operações de estoque 🔧".center(37) + "║")
+        print(Style.BRIGHT + "║" + "2 - Estrutura de estoque ⚙️".center(38) + "║")
+        print(Style.BRIGHT + "║" + "3 - Inventário Atual 📊".center(37) + "║")
+        print(Style.BRIGHT + "║" + "4 - Encerrar sessão 🚪".center(37) + "║")
+        print("╚══════════════════════════════════════╝\n")
 
-    print("--------------------------------")
-    print("|{:^30}|".format("STOCK CENTER"))
-    print("--------------------------------")
-    print("|{:^30}|".format("AÇÕES DISPONÍVEIS"))
-    print("|{:^30}|".format("1 - Gerenciar estoque"))
-    print("|{:^30}|".format("2 - Configurar estoque"))
-    print("|{:^30}|".format("3 - Visualizar estoque"))
-    print("|{:^30}|".format("4 - Sair"))
-    print("--------------------------------")
-
-    resposta = questionary.select('Escolha uma opção:', choices=[
-        '1',
-        '2',
-        '3',
-        '4',
-    ]).ask()
-    if resposta == "1":
-        gerenciar(estoque)
-    elif resposta == "2": 
-        configurar(estoque)
-    elif resposta == "3":
-        visualizar.visualizar_estoque(estoque)
-    elif resposta == "4":
-        print("Sessão encerrada!")
-        exit()
-    else:
-        print("Valor inválido")
-
-
+        resposta = questionary.select('Escolha uma opção:', choices=[
+            '1',
+            '2',
+            '3',
+            '4',
+        ]).ask()
+        if resposta == "1":
+            gerenciar(estoque)
+        elif resposta == "2": 
+            configurar(estoque)
+        elif resposta == "3":
+            print("╔══════════════════════════════════════╗")
+            print(Style.BRIGHT + "║" + "Inventário atual 📊".center(37) + "║") 
+            print("╚══════════════════════════════════════╝\n")
+            visualizar.visualizar_estoque(estoque)
+        elif resposta == "4":
+            print(Fore.GREEN + "Sessão encerrada!")
+            exit()
+        else:
+            print(Fore.RED + "Valor inválido❌")
+MenuPrincipal()
