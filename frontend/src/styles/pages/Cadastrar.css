@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+img {
+    height:100%;
+}
+
+#cadastrar-div{
+    background-color: var(--card-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    height: 80vh;
+    width: 50%;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 2rem;
+
+    box-shadow: var(--shadow);
+
+}
+
+input{
+    border-color: black !important;
+}
+
+label{
+    color: black !important;
+}
+
+#cadastrar-title{
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-cadastrar{
+    margin-top: 4rem;
+}
+
+
+
