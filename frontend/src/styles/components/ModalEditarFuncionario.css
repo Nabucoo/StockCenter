@@ -1,0 +1,26 @@
+#header {
+    background-color: var(--background-secondary-color);
+    color: var(--text-light);
+}
+
+#body {
+    background-color: var(--background-color);
+    color: var(--text-color)
+}
+
+#footer {
+    background-color: var(--background-secondary-color);
+    color: var(--text-light);
+}
+
+#fechar-modal {
+    background-color: var(--alert-color);
+    color: var(--text-light);
+    border: 0;
+}
+
+#atualizar-funcionario {
+    background-color: var(--warning-color);
+    color: var(--text-light);
+    border: 0
+}

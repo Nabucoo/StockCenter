@@ -1,0 +1,9 @@
+#card {
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    background-color: var(--background-secondary-color)!important;
+    color: var(--text-light)!important;
+}
+

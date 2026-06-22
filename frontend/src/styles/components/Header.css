@@ -1,0 +1,22 @@
+.navbar {
+    background-color: var(--background-secondary-color);
+}
+
+.navbar-brand, .nav-link {
+    color: var(--text-light)!important; 
+    transition: 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--text-gold)!important;
+    transform: scale(1.05);
+
+}
+
+.navbar-brand:hover {
+    color: var(--text-light);
+}
+
+.nav-link.active{
+    color: var(--text-light) !important;
+}

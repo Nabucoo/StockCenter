@@ -1,10 +1,11 @@
 :root {
     --background-color: #F8FAFC;
-    --backgorund-secondary-color: #1E293B;
+    --background-secondary-color: #1E293B;
     --background-tertiary-color: #F59E0B;
 
     --text-color: #0F172A;
     --text-light: #FFFFFF;
+    --text-gold: #F59E0B;
     
     --card-color: #FFFFFF;
 

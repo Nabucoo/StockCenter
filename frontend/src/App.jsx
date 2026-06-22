@@ -1,9 +1,18 @@
-import Cadastrar from './pages/Cadastrar';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/login';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import Home from './pages/home';
+import Funcionarios from './pages/Funcionarios'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-    return <Cadastrar />;
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/funcionarios" element={<Funcionarios />}/>
+            </Routes>
+        </BrowserRouter>
+    );
 }
-
-export default App;
+export default App; 
