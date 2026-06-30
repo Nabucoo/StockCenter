@@ -2,47 +2,107 @@
     margin: 0;
     padding: 0;
 }
-img {
-    height:100%;
+
+#login-div {
+    background-color: var(--card-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1rem;
 }
 
-#login-div{
-    background-color: var(--card-color);
+#login-title,
+#form-login {
+    flex: 1;
+}
+
+#login-title {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-
-    height: 80vh;
-    width: 50%;
-    padding: 1rem;
-    border: 1px solid black;
-    border-radius: 2rem;
-
-    box-shadow: var(--shadow);
-
+    gap: 1rem;
 }
 
-input{
+#login-title img {
+    width: 35vw;
+    max-width: 400px;
+    min-width: 200px;
+    height: auto;
+}
+
+input {
     border-color: black !important;
 }
 
-label{
+label {
     color: black !important;
 }
 
-#login-title{
-    height: 20%;
+#form-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
-#form-login{
-    margin-top: 4rem;
+#form-login > div {
+    width: 80%;
+    transition: var(--transition);
+}
+#form-login > div:hover {
+    transform: scale(1.05);
 }
 
+.form-label {
+    width: 100%;
+    font-size: 2rem;
+    text-align: left;
+}
 
+.form-control {
+    margin: 0.2rem 0 2rem 0;
+    height: 3rem;
+    font-size: 10rem;
+}
 
+button {
+    height: 4rem;
+    width: 40%;
+    font-size: 1.8rem !important;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+button:hover{
+    transform: scale(1.05);
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+    #login-div {
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    #login-title,
+    #form-login {
+        flex: none;
+        width: 100%;
+    }
+
+    #login-title img {
+        width: 60vw;
+        max-width: 300px;
+    }
+
+    #form-login {
+        margin-top: 0;
+    }
+}

@@ -1,10 +1,41 @@
 import '../styles/components/Header.css'
 import logo from '../assets/images/logo.png'
+import axios from 'axios';
 
 import { useNavigate, Link } from 'react-router-dom';
 
+import { useState, useEffect } from 'react';
+
+
+
 function Header() {
     const navigate = useNavigate();
+    const [isAdmin, setIsAdmin] = useState(false);
+
+        useEffect(() => {
+        
+        async function isAdm() {
+            const token = localStorage.getItem('token');
+
+            if (!token) return;
+
+            try {
+                await axios.get(
+                    'http://localhost:3000/verify/adm',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
+                setIsAdmin(true);
+            } catch {
+                setIsAdmin(false);
+            }
+        }
+
+    isAdm();
+    }, [navigate]);
     return (
         <div>
             <header>
@@ -31,10 +62,9 @@ function Header() {
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav ms-auto">
                             <Link className="nav-link" to="/home">Início</Link>
-                            <Link className="nav-link" to="/home">Estoque</Link>
-                            <Link className="nav-link" to="/home">Vendas</Link>
-                            <Link className="nav-link" to="/home">Dashboard</Link>
-                            <Link className="nav-link" to="/funcionarios">Funcionários</Link>
+                            <Link className="nav-link" to="/estoque">Estoque</Link>
+                            {isAdmin && (<Link className="nav-link" to="/movimentacoes">Movimentações</Link>)}
+                            {isAdmin && (<Link className="nav-link" to="/funcionarios">Funcionários</Link>)}
                             <Link className="nav-link" to="/" onClick={() => localStorage.removeItem('token')}>Sair</Link>
                         </div>
                     </div>

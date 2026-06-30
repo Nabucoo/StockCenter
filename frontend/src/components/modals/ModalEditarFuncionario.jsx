@@ -1,10 +1,10 @@
 import axios from 'axios';
-import '../styles/components/ModalEditarFuncionario.css';
+import '../../styles/components/ModalEditarFuncionario.css';
 import { Modal, Button, Form } from "react-bootstrap";
-import Alert from "./Alert";
+import Alert from "../Alert";
 import { useState } from 'react';
 
-function ModalEditarFuncionario({ id, show, onHide, atualizarFuncionarios }) {
+function ModalEditarFuncionario({ id, show, onHide, atualizarFuncionarios, mostrarFeedback }) {
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
@@ -15,13 +15,22 @@ function ModalEditarFuncionario({ id, show, onHide, atualizarFuncionarios }) {
         text: ""
     });
 
+    function limparMensagem() {
+        setMensagem({ type: "", text: "" });
+    }
+
+    function handleClose() {
+        limparMensagem();
+        onHide();
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
 
         const token = localStorage.getItem('token');
 
         try {
-            await axios.patch(
+            const res = await axios.patch(
                 `http://localhost:3000/funcionarios/editar/${id}`,
                 {
                     nome,
@@ -35,9 +44,12 @@ function ModalEditarFuncionario({ id, show, onHide, atualizarFuncionarios }) {
                 }
             );
             if (res.status === 200) {
-                alert('Funcionário removido com sucesso!');
+                mostrarFeedback?.({
+                    type: "Success",
+                    text: res.data?.mensagem || "Funcionário atualizado com sucesso!"
+                });
                 atualizarFuncionarios();
-                onHide();
+                handleClose();
             }
 
         } catch (error) {
@@ -49,7 +61,7 @@ function ModalEditarFuncionario({ id, show, onHide, atualizarFuncionarios }) {
     }
 
     return (
-        <Modal show={show} onHide={onHide}>
+        <Modal show={show} onHide={handleClose}>
             <Form onSubmit={handleSubmit}>
                 <Modal.Header id="header" closeButton>
                     <Modal.Title>Atualizar Funcionário</Modal.Title>
@@ -97,7 +109,7 @@ function ModalEditarFuncionario({ id, show, onHide, atualizarFuncionarios }) {
                     <Button
                         id="fechar-modal"
                         type="button"
-                        onClick={onHide}
+                        onClick={handleClose}
                     >
                         Fechar
                     </Button>

@@ -1,0 +1,13 @@
+.card-footer {
+    background-color: var(--background-secondary-color)!important;
+}
+
+#btn-editar {
+    background-color: var(--warning-color);
+    border: var(--warning-color);
+}
+
+#btn-remover {
+    background-color: var(--alert-color);
+    border: var(--alert-color);
+}

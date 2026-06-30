@@ -1,11 +1,9 @@
-import '../styles/components/FuncionarioCard.css';
-import ModalEditarFuncionario from '../components/ModalEditarFuncionario';
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import '../../styles/components/FuncionarioCard.css';
+import ModalEditarFuncionario from '../modals/ModalEditarFuncionario';
 import axios from 'axios';
 import { useState } from 'react';
 
-function FuncionarioCard({ id, nome, email, senha, atualizarFuncionarios }) {    
+function FuncionarioCard({ id, nome, email, senha, atualizarFuncionarios, mostrarFeedback }) {    
     const [modalEditarFuncionario, setModalEditarFuncionario] = useState(false);
     const token = localStorage.getItem('token');
 
@@ -21,15 +19,18 @@ function FuncionarioCard({ id, nome, email, senha, atualizarFuncionarios }) {
             );
 
             if (res.status === 200) {
-                alert('Funcionário removido com sucesso!');
+                mostrarFeedback?.({
+                    type: "Success",
+                    text: res.data?.mensagem || "Funcionário removido com sucesso!"
+                });
                 atualizarFuncionarios();
             }
 
             } catch (error) {
-                console.error(
-                    error.response?.data?.mensagem ||
-                    'Erro ao remover funcionário'
-                );
+                mostrarFeedback?.({
+                    type: "Alert",
+                    text: error.response?.data?.mensagem || "Erro ao remover funcionário"
+                });
             }
         }
 
@@ -59,7 +60,7 @@ function FuncionarioCard({ id, nome, email, senha, atualizarFuncionarios }) {
                 <button type="button" id="btn-editar-funcionario" className="btn" onClick={() => setModalEditarFuncionario(true)}>
                     ✏️ Editar
                 </button>
-                <ModalEditarFuncionario show={modalEditarFuncionario} onHide={() => setModalEditarFuncionario()} id={id} atualizarFuncionarios={atualizarFuncionarios}/>
+                <ModalEditarFuncionario show={modalEditarFuncionario} onHide={() => setModalEditarFuncionario(false)} id={id} atualizarFuncionarios={atualizarFuncionarios} mostrarFeedback={mostrarFeedback}/>
                 <button type="button" id="btn-rmv-funcionario" className="btn" onClick={() => {handleRemoveFuncionario(id)}}>
                     🗑️ Remover
                 </button>

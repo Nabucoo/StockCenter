@@ -1,11 +1,11 @@
 // ModalAddFuncionario.jsx
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import Alert from "./Alert"; 
-import '../styles/components/ModalAddFuncionario.css';
+import Alert from "../Alert"; 
+import '../../styles/components/ModalAddFuncionario.css';
 import axios from "axios";
 
-function ModalAddFuncionario({ show, onHide, atualizarFuncionarios }) {
+function ModalAddFuncionario({ show, onHide, atualizarFuncionarios, mostrarFeedback }) {
 
     const[nome, setNome] = useState('');
     const[email, setEmail] = useState('');
@@ -15,6 +15,15 @@ function ModalAddFuncionario({ show, onHide, atualizarFuncionarios }) {
         text: ""
     });
     const token = localStorage.getItem('token');    
+
+    function limparMensagem() {
+        setMensagem({ type: "", text: "" });
+    }
+
+    function handleClose() {
+        limparMensagem();
+        onHide();
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -36,14 +45,17 @@ function ModalAddFuncionario({ show, onHide, atualizarFuncionarios }) {
             );
 
             if (res.status === 201) {
-                setMensagem({
+                mostrarFeedback?.({
                     type: "Success",
-                    text: "Funcionário cadastrado com sucesso!"
+                    text: res.data?.mensagem || "Funcionário cadastrado com sucesso!"
                 });
             }
             
+            setNome('');
+            setEmail('');
+            setSenha('');
             atualizarFuncionarios();
-            onHide();
+            handleClose();
 
 
         } catch(error) {
@@ -55,7 +67,7 @@ function ModalAddFuncionario({ show, onHide, atualizarFuncionarios }) {
     }
 
     return (
-        <Modal show={show} onHide={onHide}>
+        <Modal show={show} onHide={handleClose}>
             <Form onSubmit={handleSubmit}>
                 <Modal.Header id="header" closeButton>
                     <Modal.Title>Adicionar Funcionário</Modal.Title>
@@ -103,7 +115,7 @@ function ModalAddFuncionario({ show, onHide, atualizarFuncionarios }) {
                     <Button
                         id="fechar-modal"
                         type="button"
-                        onClick={onHide}
+                        onClick={handleClose}
                     >
                         Fechar
                     </Button>

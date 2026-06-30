@@ -27,7 +27,7 @@ function Home() {
                         }
                     }
                 )
-            } catch (error) {
+            } catch {
                 navigate('/')
                 localStorage.removeItem('token');
             }

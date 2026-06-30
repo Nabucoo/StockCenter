@@ -12,13 +12,22 @@
     padding: 1rem;
 }
 
+#funcionarios-cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1rem 0 2rem 0;
+}
+
 #btn-add-funcionario {
     width: 10%;
     border-radius: 0.5rem;
 }
 
-.btn {
-   
+button {
+    width: auto;
+    height: auto;
+    font-size: 1rem!important;
 }
 
 #btn-editar-funcionario {
@@ -28,4 +37,10 @@
 #btn-rmv-funcionario {
     background-color: var(--alert-color);
 }
+
+#btn-add-funcionario {
+    padding: 1rem;
+    width: fit-content;
+}
+
 

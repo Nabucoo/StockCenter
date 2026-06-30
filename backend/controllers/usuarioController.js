@@ -1,7 +1,7 @@
 const connection = require('../database/connection');
 const { gerarToken } = require('../services/authService');
 
-exports.login = async (req, res) => {
+exports.login = async(req, res) => {
 
     const { email, senha } = req.body;
 
@@ -11,9 +11,8 @@ exports.login = async (req, res) => {
         });
     }
 
-    const[rows] = await connection.query(
-        'SELECT id, email, senha, id_Administrador FROM usuarios WHERE email = ?',
-        [email]
+    const [rows] = await connection.query(
+        'SELECT id, email, senha, id_Administrador FROM usuarios WHERE email = ?', [email]
     );
 
     if (rows.length === 0) {

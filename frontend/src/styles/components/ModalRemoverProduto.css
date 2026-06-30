@@ -1,0 +1,4 @@
+#btn-cancelar, #btn-rmv {
+    background-color: var(--alert-color);
+}
+

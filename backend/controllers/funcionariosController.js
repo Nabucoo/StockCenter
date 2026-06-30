@@ -80,8 +80,6 @@ exports.editar = async(req, res) => {
         'SELECT id FROM usuarios WHERE email = ? AND id != ?', [email, id]
     );
 
-    console.log(rows)
-
     if (rows.length > 0) {
         return res.status(400).json({
             mensagem: 'Email em uso!'

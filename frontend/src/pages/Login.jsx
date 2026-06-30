@@ -2,7 +2,7 @@ import '../styles/pages/Login.css';
 import logo from '../assets/images/logo.png';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import DangerAlert from '../components/Alert';
+import Alert from '../components/Alert';
 import { useNavigate } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
@@ -28,8 +28,8 @@ function Login() {
                     }
                 );
                 navigate('/home');
-            } catch (error) {
-                
+            } catch {
+                localStorage.removeItem('token');
             }
         }
 
@@ -80,13 +80,13 @@ function Login() {
             <Form id="form-login" onSubmit={handleSubmit}>
 
                 {mensagem.text && (
-                    <DangerAlert mensagem={mensagem} />
+                    <Alert mensagem={mensagem} />
                 )}
 
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
 
-                    <Form.Control
+                    <Form.Control 
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -97,7 +97,7 @@ function Login() {
                 <Form.Group>
                     <Form.Label>Senha</Form.Label>
 
-                    <Form.Control
+                    <Form.Control 
                         type="password"
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
