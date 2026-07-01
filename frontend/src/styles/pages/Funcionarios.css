@@ -39,6 +39,7 @@ button {
 }
 
 #btn-add-funcionario {
+    background-color: var(--warning-color);
     padding: 1rem;
     width: fit-content;
 }

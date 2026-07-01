@@ -1,6 +1,8 @@
 #estoque-body {
     display: flex;
     flex-direction: column;
+    margin: 1rem;
+    gap: 1rem;
 }
 #estoque-cabecalho {
     width: 100%;

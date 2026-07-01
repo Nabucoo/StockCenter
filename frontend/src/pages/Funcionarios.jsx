@@ -47,7 +47,7 @@ function Funcionarios() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        
+         
         async function isAdm() {
             const token = localStorage.getItem('token');
 
@@ -63,7 +63,7 @@ function Funcionarios() {
                     }
                 );
             } catch {
-                navigate('/home');
+                navigate('/estoque');
             }
         }
 

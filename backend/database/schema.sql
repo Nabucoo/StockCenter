@@ -46,6 +46,8 @@ CREATE TABLE movimentacoes (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	
     id_funcionario INT,
+
+    id_administrador INT,
     
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
@@ -55,11 +57,15 @@ CREATE TABLE movimentacoes (
     
     valor_total DECIMAL(10, 2) NOT NULL,
     
-    tipo ENUM("entrada", "saída"),
+    tipo ENUM("entrada", "saida"),
 		
-	CONSTRAINT fk_funcionario_administrador
+	CONSTRAINT fk_movimentacao_funcionario
 	FOREIGN KEY (id_funcionario)
-	REFERENCES usuarios(id)
+	REFERENCES usuarios(id),
+
+    CONSTRAINT fk_movimentacao_administrador
+    FOREIGN KEY (id_administrador)
+    REFERENCES usuarios(id)
 );
 
 
@@ -72,4 +78,3 @@ INSERT INTO usuarios (nome, email, senha, tipo) VALUES
     'Admin123*',
     'ADMIN'
 );
-

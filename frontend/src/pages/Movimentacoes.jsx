@@ -43,7 +43,7 @@ function Movimentacoes() {
                     }
                 );
             } catch {
-                navigate('/home');
+                navigate('/estoque');
             }
         }
 

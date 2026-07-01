@@ -27,7 +27,7 @@ function Login() {
                         }
                     }
                 );
-                navigate('/home');
+                navigate('/estoque');
             } catch {
                 localStorage.removeItem('token');
             }
@@ -60,7 +60,7 @@ function Login() {
                 res.data.token
             );
 
-            navigate('/home');
+            navigate('/estoque');
 
         } catch (error) {
             setMensagem({

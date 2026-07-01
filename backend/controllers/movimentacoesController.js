@@ -1,53 +1,24 @@
-const connection = require('../database/connection');
+const movimentacoesService = require('../services/movimentacoesService');
+const handleError = require('./handleError');
 
-exports.listar = async(req, res) => {
-    const usuario = req.usuario;
-    const idDono = usuario.idAdministrador ? usuario.idAdministrador : usuario.id;
+exports.listar = async (req, res) => {
+    try {
+        const movimentacoes = await movimentacoesService.listar(req.usuario);
 
-    const [movimentacoes] = await connection.query(`
-        SELECT
-            movimentacoes.*,
-            usuarios.nome AS nome_funcionario
-        FROM movimentacoes
-        LEFT JOIN usuarios
-            ON movimentacoes.id_funcionario = usuarios.id
-        WHERE movimentacoes.id_administrador = ?
-    `, [idDono]);
-
-    return res.status(200).json({
-        movimentacoes
-    })
-}
-
-exports.filtrar = async(req, res) => {
-    const usuario = req.usuario;
-    const idDono = usuario.idAdministrador ? usuario.idAdministrador : usuario.id;
-    const { dataInicial, dataFinal } = req.query;
-
-    if (!dataInicial || !dataFinal) {
-        return res.status(400).json({
-            mensagem: "Informe a data inicial e a data final."
-        });
-    }
-
-    const [movimentacoes] = await connection.query(`
-        SELECT 
-            movimentacoes.*,
-            usuarios.nome AS nome_funcionario
-        FROM movimentacoes
-        LEFT JOIN usuarios
-            ON movimentacoes.id_funcionario = usuarios.id
-            WHERE movimentacoes.id_administrador = ? AND
-            data_criacao BETWEEN ? AND ?
-        `, [idDono, dataInicial, `${dataFinal} 23:59:59`]);
-
-    if (movimentacoes.length == 0) {
         return res.status(200).json({
-            mensagem: 'Sem produtos!'
-        })
+            movimentacoes
+        });
+    } catch (error) {
+        return handleError(error, res);
     }
+};
 
-    return res.status(200).json({
-        movimentacoes
-    })
-}
+exports.filtrar = async (req, res) => {
+    try {
+        const resultado = await movimentacoesService.filtrar(req.query, req.usuario);
+
+        return res.status(200).json(resultado);
+    } catch (error) {
+        return handleError(error, res);
+    }
+};

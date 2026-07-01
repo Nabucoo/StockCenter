@@ -3,7 +3,6 @@ const router = express.Router();
 
 const produtosController = require('../controllers/produtosController');
 const auth = require('../midlleware/auth');
-const authAdm = require('../midlleware/authAdm');
 
 router.post('/cadastrar', auth, produtosController.cadastrar);
 router.patch('/remover/:id', auth, produtosController.remover);
